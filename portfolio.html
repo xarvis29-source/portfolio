@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vishal Kumawat | BCA Student & Web Developer</title>
+<meta name="description" content="Portfolio of Vishal Kumawat, BCA student at Maharani College, Jaipur.">
+<!-- Inline SVG favicon (no extra file needed) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='black'/%3E%3Ctext x='32' y='43' font-size='34' font-family='Arial' font-weight='700' fill='white' text-anchor='middle'%3EVK%3C/text%3E%3C/svg%3E">
+
+<style>
+/* =====================================================
+   1. THEME  — change colors / fonts / radius here
+   ===================================================== */
+:root{
+  --bg:#000;                         /* page background */
+  --text:#f5f5f5;                    /* main text */
+  --muted:#9a9a9a;                   /* secondary text */
+  --line:rgba(255,255,255,.14);      /* borders */
+  --line-strong:rgba(255,255,255,.35);
+  --glass:rgba(255,255,255,.04);     /* card background */
+  --glass-hover:rgba(255,255,255,.08);
+  --radius:18px;
+  --font:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --max:1080px;                      /* content width */
+}
+
+/* =====================================================
+   2. BASE
+   ===================================================== */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+:focus-visible{outline:2px solid #fff;outline-offset:3px;border-radius:6px}
+.wrap{width:min(var(--max),92%);margin-inline:auto}
+section{padding:96px 0}
+h2{font-size:clamp(1.8rem,4vw,2.5rem);letter-spacing:-.02em;line-height:1.15;margin-bottom:12px}
+.lead{color:var(--muted);max-width:60ch;margin-bottom:44px}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 26px;border-radius:999px;
+  font:600 .95rem var(--font);border:1px solid var(--line-strong);background:transparent;color:var(--text);cursor:pointer;
+  transition:transform .25s,background .25s,box-shadow .25s,color .25s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 0 28px rgba(255,255,255,.18)}
+.btn.primary{background:#fff;color:#000;border-color:#fff}
+.btn.primary:hover{background:#e8e8e8}
+.btn.small{padding:8px 18px;font-size:.85rem}
+
+/* Glass card (shared by skills, projects, education, contact) */
+.card{background:var(--glass);border:1px solid var(--line);border-radius:var(--radius);padding:28px;
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  transition:transform .3s,border-color .3s,background .3s,box-shadow .3s}
+.card:hover{transform:translateY(-4px);border-color:var(--line-strong);background:var(--glass-hover);box-shadow:0 10px 40px rgba(255,255,255,.06)}
+
+/* =====================================================
+   3. NAVIGATION
+   ===================================================== */
+header{position:fixed;inset:0 0 auto 0;z-index:50;background:rgba(0,0,0,.7);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font-weight:700;letter-spacing:-.02em;font-size:1.1rem}
+.nav-links{display:flex;gap:30px}
+.nav-links a{color:var(--muted);font-size:.93rem;transition:color .2s}
+.nav-links a:hover{color:#fff}
+.menu-btn{display:none;background:none;border:1px solid var(--line);color:#fff;border-radius:10px;padding:6px 12px;font-size:1rem;cursor:pointer}
+
+/* =====================================================
+   4. HERO
+   ===================================================== */
+#hero{min-height:100vh;display:flex;align-items:center;padding:120px 0 80px;position:relative;overflow:hidden}
+/* faint grid + glow behind the name */
+#hero::before{content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(600px 380px at 25% 38%,rgba(255,255,255,.12),transparent 70%),
+    linear-gradient(var(--line) 1px,transparent 1px) 0 0/64px 64px,
+    linear-gradient(90deg,var(--line) 1px,transparent 1px) 0 0/64px 64px;
+  -webkit-mask-image:radial-gradient(ellipse at 30% 40%,#000 15%,transparent 72%);
+          mask-image:radial-gradient(ellipse at 30% 40%,#000 15%,transparent 72%);opacity:.7}
+.hero-inner{position:relative}
+.badge{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line);background:var(--glass);border-radius:999px;padding:6px 16px;font-size:.88rem;color:var(--muted);margin-bottom:26px}
+.badge i{width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 12px #fff;animation:pulse 2.4s infinite}
+h1{font-size:clamp(2.8rem,9vw,6.2rem);line-height:1.02;letter-spacing:-.04em;font-weight:800;text-shadow:0 0 60px rgba(255,255,255,.25)}
+.role{margin-top:18px;font-size:clamp(1.1rem,2.4vw,1.45rem);color:#d6d6d6}
+.hero-text{margin:20px 0 36px;max-width:56ch;color:var(--muted);font-size:1.05rem}
+.hero-btns{display:flex;flex-wrap:wrap;gap:14px}
+/* The one orchestrated page-load sequence */
+.rise{opacity:0;transform:translateY(22px);animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards}
+.rise:nth-child(2){animation-delay:.1s}.rise:nth-child(3){animation-delay:.2s}
+.rise:nth-child(4){animation-delay:.3s}.rise:nth-child(5){animation-delay:.4s}
+@keyframes rise{to{opacity:1;transform:none}}
+@keyframes pulse{50%{opacity:.35}}
+
+/* =====================================================
+   5. ABOUT
+   ===================================================== */
+.about{display:grid;grid-template-columns:1.4fr 1fr;gap:28px;align-items:stretch}
+.about p{color:#cfcfcf;margin-bottom:14px}
+.facts li{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--line);font-size:.95rem}
+.facts li:last-child{border:0}
+.facts span{color:var(--muted)}
+
+/* =====================================================
+   6. SKILLS — edit the --level value (0-100) on each card
+   ===================================================== */
+.grid{display:grid;gap:20px}
+.skills{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.skill-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.skill-top h3{font-size:1.1rem}
+.skill-top span{color:var(--muted);font-size:.9rem}
+.skill p{color:var(--muted);font-size:.9rem;margin-bottom:16px}
+.bar{height:6px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden}
+.bar b{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#777,#fff);box-shadow:0 0 12px rgba(255,255,255,.5);transition:width 1.3s cubic-bezier(.2,.7,.2,1)}
+.skill.in .bar b{width:var(--level)}  /* filled when scrolled into view */
+
+/* =====================================================
+   7. PROJECTS — duplicate a <article class="card project"> to add more
+   ===================================================== */
+.projects{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.project{display:flex;flex-direction:column;gap:14px}
+.project h3{font-size:1.25rem}
+.project p{color:var(--muted);font-size:.95rem;flex:1}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tags li{border:1px solid var(--line);border-radius:999px;padding:3px 12px;font-size:.8rem;color:#cfcfcf}
+.project .btn{align-self:flex-start;margin-top:6px}
+
+/* =====================================================
+   8. EDUCATION
+   ===================================================== */
+.edu{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+.edu h3{font-size:1.3rem}
+.edu p{color:var(--muted)}
+.edu .years{border:1px solid var(--line-strong);border-radius:999px;padding:6px 18px;font-size:.9rem}
+
+/* =====================================================
+   9. CONTACT
+   ===================================================== */
+.contact{display:grid;grid-template-columns:1fr 1.3fr;gap:28px}
+.links li{padding:16px 0;border-bottom:1px solid var(--line)}
+.links li:last-child{border:0}
+.links small{display:block;color:var(--muted)}
+.links a{transition:opacity .2s;word-break:break-all}
+.links a:hover{opacity:.7;text-decoration:underline}
+form{display:grid;gap:16px}
+label{display:grid;gap:6px;font-size:.9rem;color:var(--muted)}
+input,textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;padding:12px 14px;color:#fff;font:inherit;transition:border-color .2s,box-shadow .2s}
+input:focus,textarea:focus{outline:none;border-color:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.12)}
+textarea{min-height:130px;resize:vertical}
+#formNote{font-size:.88rem;color:var(--muted);min-height:1.2em}
+
+/* =====================================================
+   10. FOOTER
+   ===================================================== */
+footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-size:.9rem}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.foot nav{height:auto;gap:22px}
+.foot a:hover{color:#fff}
+
+/* =====================================================
+   11. RESPONSIVE
+   ===================================================== */
+@media(max-width:820px){
+  section{padding:72px 0}
+  .about,.contact{grid-template-columns:1fr}
+  .menu-btn{display:block}
+  .nav-links{position:absolute;top:68px;left:0;right:0;flex-direction:column;gap:0;background:rgba(0,0,0,.95);border-bottom:1px solid var(--line);display:none}
+  .nav-links.open{display:flex}
+  .nav-links a{padding:16px 4%;border-top:1px solid var(--line)}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .rise{opacity:1;transform:none}
+  .skill .bar b{width:var(--level)}
+}
+</style>
+</head>
+
+<body>
+
+<!-- ============ NAVIGATION ============ -->
+<header>
+  <nav class="wrap" aria-label="Main navigation">
+    <a href="#hero" class="logo">Vishal Kumawat</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">Menu</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section id="hero">
+  <div class="wrap hero-inner">
+    <div class="badge rise"><i></i> Open to internships and collaborations</div>
+    <h1 class="rise">Vishal Kumawat</h1>
+    <p class="role rise">BCA Student at Maharani College, Jaipur</p>
+    <p class="hero-text rise">I build clean, responsive websites and small programs, and I'm learning something new about software every week.</p>
+    <div class="hero-btns rise">
+      <a href="#projects" class="btn primary">View Projects</a>
+      <a href="#contact" class="btn">Contact Me</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about">
+  <div class="wrap">
+    <h2>About me</h2>
+    <p class="lead">A student who likes turning ideas into working software.</p>
+    <div class="about">
+      <div class="card">
+        <!-- Edit your intro below -->
+        <p>I'm a Bachelor of Computer Applications (BCA) student at Maharani College, Jaipur, with a strong interest in technology, programming and web development.</p>
+        <p>I enjoy building things from scratch, from simple HTML and CSS pages to small Python and C++ programs, and I use Git and GitHub to keep my work organised and public.</p>
+        <p>My goal is to grow into a skilled developer by learning continuously and building real projects.</p>
+      </div>
+      <ul class="card facts">
+        <li><span>Name</span> Vishal Kumawat</li>
+        <li><span>Studying</span> BCA</li>
+        <li><span>College</span> Maharani College</li>
+        <li><span>Location</span> Jaipur, India</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<!-- To change a level, edit style="--level:NN%" on the card -->
+<section id="skills">
+  <div class="wrap">
+    <h2>Skills</h2>
+    <p class="lead">Languages and tools I work with. Levels show how comfortable I am today.</p>
+    <div class="grid skills">
+      <article class="card skill" style="--level:85%">
+        <div class="skill-top"><h3>HTML</h3><span>85%</span></div>
+        <p>Semantic, accessible page structure.</p>
+        <div class="bar"><b></b></div>
+      </article>
+      <article class="card skill" style="--level:80%">
+        <div class="skill-top"><h3>CSS</h3><span>80%</span></div>
+        <p>Responsive layouts, Flexbox, Grid, animations.</p>
+        <div class="bar"><b></b></div>
+      </article>
+      <article class="card skill" style="--level:65%">
+        <div class="skill-top"><h3>JavaScript</h3><span>65%</span></div>
+        <p>DOM manipulation and interactive features.</p>
+        <div class="bar"><b></b></div>
+      </article>
+      <article class="card skill" style="--level:70%">
+        <div class="skill-top"><h3>Python</h3><span>70%</span></div>
+        <p>Scripts, problem solving and automation.</p>
+        <div class="bar"><b></b></div>
+      </article>
+      <article class="card skill" style="--level:65%">
+        <div class="skill-top"><h3>C/C++</h3><span>65%</span></div>
+        <p>Programming fundamentals and data structures.</p>
+        <div class="bar"><b></b></div>
+      </article>
+      <article class="card skill" style="--level:70%">
+        <div class="skill-top"><h3>Git &amp; GitHub</h3><span>70%</span></div>
+        <p>Version control, commits and repositories.</p>
+        <div class="bar"><b></b></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<!-- Replace the names, descriptions and GitHub links with your real projects -->
+<section id="projects">
+  <div class="wrap">
+    <h2>Projects</h2>
+    <p class="lead">A few things I've built or am building. Each links to its code on GitHub.</p>
+    <div class="grid projects">
+      <article class="card project">
+        <h3>Personal Portfolio</h3>
+        <p>This responsive portfolio site, built with plain HTML, CSS and JavaScript in a single file.</p>
+        <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+        <a class="btn small" href="https://github.com/xarvis29-source" target="_blank" rel="noopener">View on GitHub</a>
+      </article>
+      <article class="card project">
+        <h3>Task Manager App</h3>
+        <p>A to-do app where you can add, complete and delete tasks, with data saved in the browser.</p>
+        <ul class="tags"><li>JavaScript</li><li>CSS</li></ul>
+        <a class="btn small" href="https://github.com/xarvis29-source" target="_blank" rel="noopener">View on GitHub</a>
+      </article>
+      <article class="card project">
+        <h3>Student Record System</h3>
+        <p>A command-line program to store, search and update student records.</p>
+        <ul class="tags"><li>Python</li><li>File handling</li></ul>
+        <a class="btn small" href="https://github.com/xarvis29-source" target="_blank" rel="noopener">View on GitHub</a>
+      </article>
+      <article class="card project">
+        <h3>Banking Simulator</h3>
+        <p>A C++ console program that simulates deposits, withdrawals and account balances.</p>
+        <ul class="tags"><li>C++</li><li>OOP</li></ul>
+        <a class="btn small" href="https://github.com/xarvis29-source" target="_blank" rel="noopener">View on GitHub</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EDUCATION ============ -->
+<section id="education">
+  <div class="wrap">
+    <h2>Education</h2>
+    <p class="lead">Where I'm studying.</p>
+    <div class="card edu">
+      <div>
+        <h3>Bachelor of Computer Applications (BCA)</h3>
+        <p>Maharani College, Jaipur</p>
+      </div>
+      <!-- Edit the years below -->
+      <span class="years">In progress</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact">
+  <div class="wrap">
+    <h2>Contact</h2>
+    <p class="lead">Have a project, internship or question? Send me a message.</p>
+    <div class="contact">
+      <ul class="card links">
+        <li><small>Email</small><a href="mailto:xarvis29@gmail.com">xarvis29@gmail.com</a></li>
+        <li><small>GitHub</small><a href="https://github.com/xarvis29-source" target="_blank" rel="noopener">github.com/xarvis29-source</a></li>
+        <li><small>Location</small>Jaipur, Rajasthan, India</li>
+      </ul>
+
+      <!-- No backend: the form opens your email app with the message filled in -->
+      <form class="card" id="contactForm">
+        <label>Your name <input type="text" id="name" required autocomplete="name"></label>
+        <label>Your email <input type="email" id="email" required autocomplete="email"></label>
+        <label>Message <textarea id="message" required></textarea></label>
+        <button class="btn primary" type="submit">Send message</button>
+        <p id="formNote" role="status"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap foot">
+    <span>&copy; 2026 Vishal Kumawat</span>
+    <nav aria-label="Footer links">
+      <a href="https://github.com/xarvis29-source" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:xarvis29@gmail.com">Email</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+/* ---------- Mobile menu ---------- */
+const menuBtn = document.getElementById('menuBtn');
+const navLinks = document.getElementById('navLinks');
+menuBtn.addEventListener('click', () => {
+  const open = navLinks.classList.toggle('open');
+  menuBtn.setAttribute('aria-expanded', open);
+});
+navLinks.addEventListener('click', e => {
+  if (e.target.tagName === 'A') { navLinks.classList.remove('open'); menuBtn.setAttribute('aria-expanded', false); }
+});
+
+/* ---------- Fill skill bars when they scroll into view ---------- */
+const skills = document.querySelectorAll('.skill');
+if ('IntersectionObserver' in window) {
+  const io = new IntersectionObserver((entries, obs) => {
+    entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); obs.unobserve(en.target); } });
+  }, { threshold: .4 });
+  skills.forEach(s => io.observe(s));
+} else {
+  skills.forEach(s => s.classList.add('in'));
+}
+
+/* ---------- Contact form: opens the visitor's email app ---------- */
+document.getElementById('contactForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const msg = document.getElementById('message').value.trim();
+  const subject = encodeURIComponent('Portfolio message from ' + name);
+  const body = encodeURIComponent(msg + '\n\nFrom: ' + name + ' (' + email + ')');
+  window.location.href = 'mailto:xarvis29@gmail.com?subject=' + subject + '&body=' + body;
+  document.getElementById('formNote').textContent = 'Opening your email app. If nothing happens, write to xarvis29@gmail.com.';
+});
+</script>
+</body>
+</html>
